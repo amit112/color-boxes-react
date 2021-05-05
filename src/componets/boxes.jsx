@@ -2,19 +2,23 @@ import React from "react-dom";
 import Box from "./box";
 import { useEffect, useState } from "react";
 import { getRandomColor, shuffleArray } from "../utility";
+import { LoginService } from "../services/loginService";
+import { useHistory } from "react-router-dom";
 
 const Boxes = () => {
+  debugger;
   const boxHeight = "50px";
   const boxWidth = "50px";
 
   const [twoDArray, setTwoDArray] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     load2DArray();
   }, []);
 
   const load2DArray = () => {
-      // boxes calculed from screen size
+    // boxes calculed from screen size
     const noOfColumns = Math.round(window.screen.width / 50);
     const noOfRows = Math.round(window.screen.height / 50);
     const twoDArray = [];
@@ -75,21 +79,32 @@ const Boxes = () => {
     return shuffleArray(neighbours);
   };
 
+  const handleLogOut = () => {
+    history.push("/login");
+    LoginService.logOutUser();
+  };
+
   const props = { boxHeight, boxWidth };
-  
+
   return (
-    <div className="container">
-      {twoDArray.map((box, index) => {
-        const forwardProps = { ...props, ...box };
-        return (
-          <Box
-            key={`box-${index}`}
-            {...forwardProps}
-            twoDArray={twoDArray}
-            handleBoxColorchange={handleBoxColorchange}
-          />
-        );
-      })}
+    <div>
+      <div>
+        <button onClick={handleLogOut}>Logout</button>
+      </div>
+      <br></br>
+      <div className="container">
+        {twoDArray.map((box, index) => {
+          const forwardProps = { ...props, ...box };
+          return (
+            <Box
+              key={`box-${index}`}
+              {...forwardProps}
+              twoDArray={twoDArray}
+              handleBoxColorchange={handleBoxColorchange}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

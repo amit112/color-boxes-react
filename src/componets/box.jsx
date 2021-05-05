@@ -17,6 +17,7 @@ let Box = (props) => {
     background,
   };
 
+  console.log("hi")
   return (
     <div
       style={style}

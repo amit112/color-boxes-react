@@ -1,9 +1,17 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Boxes from "./componets/boxes";
 
+import "./App.css";
+import  Routes from "./componets/routes";
+import {LoginService} from "./services/loginService"
+import  Login  from "./componets/login/login";
+import { BrowserRouter } from "react-router-dom";
 function App() {
-  return <Boxes />;
+ return  <>
+ <BrowserRouter>
+ {
+ LoginService.isUserAlreadyLoggedIn() === "Yes" ? <Routes /> : <Login/>
+ }
+ </BrowserRouter>
+ </>
 }
 
 export default App;
