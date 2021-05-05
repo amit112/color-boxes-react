@@ -7,3 +7,8 @@ In the project directory, Please run following commands:
 
 
 ### `npm start`
+
+### `Enter Login Details`
+
+ Email = "amit@gmail.com";
+ Password = "Pass@123";
